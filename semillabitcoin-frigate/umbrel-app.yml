@@ -2,7 +2,7 @@ manifestVersion: 1
 id: semillabitcoin-frigate
 category: bitcoin
 name: Frigate
-version: "1.6.1-1"
+version: "1.6.1-2"
 tagline: Silent Payments Electrum server for Sparrow Wallet
 description: >-
   Frigate is an experimental Electrum-style server that enables Silent Payments
@@ -19,6 +19,13 @@ description: >-
   installed and synced. Initial indexing can take hours on mainnet (CPU-only)
   but is fast on signet/testnet.
 releaseNotes: >-
+  Reduce default resource usage with a 1M scriptPubKey cache, 1GB DuckDB
+  memory pool, two DuckDB threads and five Silent Payments subscriptions per
+  connection. Initial indexing may be slower. The DuckDB pool limit is not a
+  cap on total application memory; Java, native allocations and other services
+  require additional RAM. Existing indexes are preserved.
+
+
   Bump Frigate to upstream 1.6.1. 1.6.0 adds a [limits] config section
   to protect public servers (connection caps, session timeout, request
   and batch bounds, subscription limits, subscribe pacing), a

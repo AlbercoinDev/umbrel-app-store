@@ -30,6 +30,7 @@ services:
 
   server:
     image: ghcr.io/semillabitcoin/frigate-umbrel:1.6.1-1@sha256:a562b15fffe5a78d2a301bb8ac8d44d1ff881f72098d9d0f3341a91339c60cb1
+    entrypoint: ["/bin/sh", "/opt/umbrel/low-memory-entrypoint.sh"]
     user: "0:0"
     restart: on-failure
     stop_grace_period: 1m
@@ -39,6 +40,7 @@ services:
     ports:
       - "57001:57001"
     volumes:
+      - ${APP_DATA_DIR}/low-memory-entrypoint.sh:/opt/umbrel/low-memory-entrypoint.sh:ro
       - ${APP_DATA_DIR}/data:/data
       - ${APP_BITCOIN_DATA_DIR}:/data/.bitcoin:ro
     environment:
